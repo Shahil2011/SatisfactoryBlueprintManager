@@ -13,7 +13,7 @@ SteelBeam,15,Constructor,SteelIngot,60
 Quickwire,60,Constructor,GoldIngot,12
 ReinforcedPlate,5,Assembler,IronPlate,30,Screw,60
 Rotor,4,Assembler,IronRod,20,Screw,100
-ModularFrame,2,Assembler,ReinforcedPlate,IronRod,12
+ModularFrame,2,Assembler,ReinforcedPlate,3,IronRod,12
 IndustrialBeam,6,Assembler,SteelBeam,24,Concrete,30
 Stator,5,Assembler,Pipe,15,Wire,40
 Motor,5,Assembler,Rotor,10,Stator,10
