@@ -15,7 +15,7 @@ ReinforcedPlate,5,Assembler,IronPlate,30,Screw,60
 Rotor,4,Assembler,IronRod,20,Screw,100
 ModularFrame,2,Assembler,ReinforcedPlate,3,IronRod,12
 IndustrialBeam,6,Assembler,SteelBeam,24,Concrete,30
-Stator,5,Assembler,SteelPipe,15,Wire,40
+Stator,5,Assembler,Pipe,15,Wire,40
 Motor,5,Assembler,Rotor,10,Stator,10
 SmartPlating,2,Assembler,ReinforcedPlate,2,Rotor,2
 VersatileFramework,5,Assembler,ModularFrame,2.5,SteelBeam,30
