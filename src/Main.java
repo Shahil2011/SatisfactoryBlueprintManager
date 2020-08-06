@@ -45,11 +45,6 @@ public class Main {
             System.out.println(e);
         }
 
-        for(Recipe i : recipes)
-        {
-            System.out.println(i);
-        }
-
         //System Loop
         System.out.println("Please enter the number of the operation you'd like to perform:" +
                 "\n0: Exit" +
@@ -90,22 +85,29 @@ public class Main {
 
     public static void viewRecipe()
     {
-        System.out.println("Please enter the name of an item to look up the recipe for (Use no spaces, capitalise the beginning of each word, and use singular form)");
+        System.out.println("Please enter the name of an item to look up the recipe for (Use no spaces, capitalise the beginning of each word, and use singular form)" +
+                "\nEnter 'all' to view all recipes");
 
         Scanner sc = new Scanner(System.in);
         String itemName = sc.next();
-        boolean found = false;
-        for(Recipe i : recipes)
+        if(itemName.equals("all"))
         {
-            if(i.getItemName().equals(itemName))
+            for(Recipe i : recipes)
             {
-                System.out.println("Recipe found!\n" + i);
-                found = true;
+                System.out.println(i);
             }
         }
-        if(found == false)
-        {
-            System.out.println("Sorry, could not find the recipe for that item :(");
+        else {
+            boolean found = false;
+            for (Recipe i : recipes) {
+                if (i.getItemName().equals(itemName)) {
+                    System.out.println("Recipe found!\n" + i);
+                    found = true;
+                }
+            }
+            if (found == false) {
+                System.out.println("Sorry, could not find the recipe for that item :(");
+            }
         }
     }
 }
