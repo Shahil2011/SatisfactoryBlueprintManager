@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+    private static ArrayList<Recipe> recipes = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Hey! Welcome to an unofficial satisfactory blueprint manager program!");
@@ -90,35 +90,22 @@ public class Main {
 
     public static void viewRecipe()
     {
-        System.out.println("Please enter the name of an item to look up the recipe for:");
+        System.out.println("Please enter the name of an item to look up the recipe for (Use no spaces, capitalise the beginning of each word, and use singular form)");
 
         Scanner sc = new Scanner(System.in);
         String itemName = sc.next();
-        String item = "";
-
-        System.out.println("Checking file recipes.txt");
-        try
+        boolean found = false;
+        for(Recipe i : recipes)
         {
-            Scanner f = new Scanner(new File("recipes.txt"));
-            f.useDelimiter(",");
-            boolean itemFound = false;
-            while(f.hasNextLine() && !itemFound)
+            if(i.getItemName().equals(itemName))
             {
-                item = f.next();
-                if(itemName.equals(item))
-                {
-                    System.out.println("Found Item : " + item);
-                    itemFound = true;
-                    break;
-                }
-                f.nextLine();
+                System.out.println("Recipe found!\n" + i);
+                found = true;
             }
-            if(itemFound == false)
-                System.out.println("Sorry, could not find that item");
         }
-        catch (FileNotFoundException e)
+        if(found == false)
         {
-            System.out.println(e);
+            System.out.println("Sorry, could not find the recipe for that item :(");
         }
     }
 }
