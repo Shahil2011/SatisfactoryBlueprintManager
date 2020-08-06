@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Recipe
@@ -8,6 +9,7 @@ public class Recipe
     private String[] inputItems;
     private float[] inputRates;
     private int complexity;
+    public ArrayList<Recipe> recipes;
     //Single-input constructor
     public Recipe(String itemName, float itemRate, String building, String inputItem, float inputRate)
     {
@@ -18,7 +20,10 @@ public class Recipe
         inputRates = new float[1];
         inputItems[0] = inputItem;
         inputRates[0] = inputRate;
+        recipes = (ArrayList<Recipe>) Main.recipes.clone();
+        complexity = 0;
     }
+
 
     //Double-input constructor
     public Recipe(String itemName, float itemRate, String building, String inputItem1, float inputRate1, String inputItem2, float inputRate2)
@@ -32,6 +37,8 @@ public class Recipe
         inputRates[0] = inputRate1;
         inputItems[1] = inputItem2;
         inputRates[1] = inputRate2;
+        recipes = (ArrayList<Recipe>) Main.recipes.clone();
+        complexity = 0;
     }
 
     @Override
@@ -44,6 +51,31 @@ public class Recipe
                 ", inputRates=" + Arrays.toString(inputRates) +
                 ", complexity=" + complexity +
                 '}';
+    }
+
+    public int recipeComplexity()
+    {
+        int max = 0;
+        int temp = 0;
+        for(String i : inputItems)
+        {
+            if(i.equals("IronOre") || i.equals("CopperOre") || i.equals("Coal") || i.equals("Limestone"))
+            {
+                temp = 0;
+            }
+            else if(Main.getRecipe(i) == null)
+            {
+                temp = 0;
+            }
+            else
+            {
+                temp = Main.getRecipe(i).getComplexity();
+            }
+            if(max <= temp)
+                max = temp;
+        }
+        complexity = max + 1;
+        return complexity;
     }
 
     public String getItemName() {

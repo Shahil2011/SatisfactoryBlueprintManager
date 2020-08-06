@@ -6,21 +6,21 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static ArrayList<Recipe> recipes = new ArrayList<>();
+    public static ArrayList<Recipe> recipes = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Hey! Welcome to an unofficial satisfactory blueprint manager program!");
         Scanner sc = new Scanner(System.in);
-
+        sc.useDelimiter("\n");
         //Build database
         System.out.println("Building database from file recipes.txt...");
         try
         {
             Scanner f = new Scanner(new File("recipes.txt"));
             //f.useDelimiter(",");
-            while(f.hasNextLine())
+            while(f.hasNext())
             {
-                Scanner l = new Scanner(f.nextLine());
+                Scanner l = new Scanner(f.next());
                 l.useDelimiter(",");
                 String outputItem = l.next();
                 float outputRate = l.nextFloat();
@@ -46,6 +46,8 @@ public class Main {
         {
             System.out.println(e);
         }
+
+        computeComplexity();
 
         //System Loop
         System.out.println("\nPlease enter the number of the operation you'd like to perform:" +
@@ -102,6 +104,17 @@ public class Main {
         System.exit(0);
     }
 
+    public static Recipe getRecipe(String name)
+    {
+        for(Recipe i : recipes)
+        {
+            if(i.getItemName().equals(name))
+                return i;
+        }
+        return null;
+    }
+
+
     private static boolean findRecipe(String itemName)
     {
         for(Recipe i : recipes)
@@ -128,15 +141,33 @@ public class Main {
         if(item2Name.equals("exit"))
         {
             recipes.add(new Recipe(itemName,outputRate,building,item1Name,item1Rate));
+            computeComplexity();
         }
         else
         {
             System.out.println("Enter the rate of input item 2:");
             float item2Rate = sc.nextFloat();
             recipes.add(new Recipe(itemName,outputRate,building,item1Name,item1Rate,item2Name,item2Rate));
+            computeComplexity();
         }
         System.out.println("Recipe added!");
 
+    }
+
+    private static void computeComplexity()
+    {
+        boolean changed = true;
+        while(changed)
+        {
+            changed = false;
+            for (Recipe r : recipes)
+            {
+                int oldComp = r.getComplexity();
+                r.recipeComplexity();
+                if(oldComp != r.getComplexity())
+                    changed = true;
+            }
+        }
     }
 
     private static void viewRecipe(String itemName)
